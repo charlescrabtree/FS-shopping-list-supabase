@@ -43,3 +43,16 @@ export async function signOutUser() {
 }
 
 /* Data functions */
+export async function createItem(item, quantity) {
+    const response = await client
+        .from('shopping-list-sb')
+        .insert({ item: item, quantity: quantity, bought: false, user_id: client.auth.user().id }).single();
+    
+    return checkError(response);
+}
+
+
+
+function checkError({ data, error }) {
+    return error ? console.error(error) : data;
+}

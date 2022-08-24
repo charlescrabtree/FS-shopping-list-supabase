@@ -1,6 +1,6 @@
 // importing other stuff, utility functions for:
 // working with supabase:
-import { checkAuth, signOutUser } from './fetch-utils.js';
+import { checkAuth, signOutUser, createItem } from './fetch-utils.js';
 // pure rendering (data --> DOM):
 import { renderItmes } from './render-utils.js';
 /*  "boiler plate" auth code */
@@ -36,4 +36,5 @@ form.addEventListener('submit', async (e) => {
 
     form.reset();
 });
-// events:
+
+
