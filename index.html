@@ -18,20 +18,38 @@
 
 <body>
     <header class="page-header">
-        <img class="logo" src="/assets/html_css_js.png">
-        <p class="title">Supabase Web App</p>
+        
+        <p class="title">Supabase Shopping List</p>
         <nav>
             <a id="sign-out-link" href="auth">Sign Out</a>
         </nav>
     </header>
 
     <main>
+        <section>
+            <form class="item-form">
+                <label for="quantity">
+                    Quantity:
+                    <input type="number" name="quantity" min="0" />
+                </label>
+                <label for="item">
+                    Item:
+                    <input name="item" type="text" />
+                </label>
+                <button>Add item(s) to list</button>
+            </form>
+            <div id="list-container" class="list">
+
+            </div>
+            <button class="delete" id="delete-button">Delete thine list</button>
+        </section>
+
 
     </main>
 
-    <footer>&copy;2022 Alchemy Software Developer</footer>
+    <footer>&copy;2022 Dovahteam Software</footer>
 
-    <script type="module" src="app.js"></script>
+    <script type="module" src="list.js"></script>
 </body>
 
 </html>
