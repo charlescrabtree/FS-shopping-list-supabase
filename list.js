@@ -1,6 +1,6 @@
 // importing other stuff, utility functions for:
 // working with supabase:
-import { checkAuth, signOutUser, createItem, getItems, buyItem } from './fetch-utils.js';
+import { checkAuth, signOutUser, createItem, getItems, buyItem, deleteItems } from './fetch-utils.js';
 // pure rendering (data --> DOM):
 import { renderItems } from './render-utils.js';
 /*  "boiler plate" auth code */
@@ -56,9 +56,25 @@ async function displayItems() {
     }
 }
 
-displayItems();
-
 window.addEventListener('load', async () => {
     itemsArr = await getItems();
     displayItems();
 });
+
+function displayDeleteButton() {
+    if (itemsArr.length > 0) {
+        deleteButton.classList.add('delete-button');
+        deleteButton.classList.remove('hidden');
+    } else if (itemsArr.length === 0) {
+        deleteButton.classList.add('hidden');
+    }
+}
+
+deleteButton.addEventListener('click', async () => {
+    await deleteItems();
+    itemsArr = [];
+    displayItems();
+});
+
+displayItems();
+displayDeleteButton();
