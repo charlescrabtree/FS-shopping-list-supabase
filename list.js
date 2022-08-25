@@ -30,7 +30,6 @@ form.addEventListener('submit', async (e) => {
     const quantity = data.get('quantity');
 
     const whatever = await createItem(item, quantity);
-    console.log('whatever', whatever);
     itemsArr.push(whatever);
     displayItems();
 
@@ -48,12 +47,13 @@ async function displayItems() {
         renderItem.addEventListener('click', async () => {
             await buyItem(item.id);
 
-            if (item.buyItem === true) {
-                renderItem.classList.add('item-bought');
-            } displayItems();
+            // if (item.buyItem === true) 
+            renderItem.classList.add('item-bought');
+            // displayItems();
         });
         listContainer.append(renderItem);
     }
+    displayDeleteButton();
 }
 
 window.addEventListener('load', async () => {
@@ -76,5 +76,5 @@ deleteButton.addEventListener('click', async () => {
     displayItems();
 });
 
-displayItems();
+// displayItems();
 displayDeleteButton();
