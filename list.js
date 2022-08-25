@@ -1,8 +1,8 @@
 // importing other stuff, utility functions for:
 // working with supabase:
-import { checkAuth, signOutUser, createItem } from './fetch-utils.js';
+import { checkAuth, signOutUser, createItem, getItems, buyItem } from './fetch-utils.js';
 // pure rendering (data --> DOM):
-import { renderItmes } from './render-utils.js';
+import { renderItems } from './render-utils.js';
 /*  "boiler plate" auth code */
 // checking if we have a user! (will redirect to auth if not):
 checkAuth();
@@ -20,7 +20,7 @@ const form = document.querySelector('form');
 const deleteButton = document.getElementById('delete-button');
 
 // local state:
-let itemsArr= [];
+let itemsArr = [];
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -29,12 +29,35 @@ form.addEventListener('submit', async (e) => {
     const item = data.get('item');
     const quantity = data.get('quantity');
 
-    const newItem = await createItem(item, quantity);
-    itemsArr.push(newItem);
-
-    await displayItems();
+    const whatever = await createItem(item, quantity);
+    console.log('whatever', whatever);
+    itemsArr.push(whatever);
+    displayItems();
 
     form.reset();
 });
 
 
+
+async function displayItems() {
+    listContainer.textContent = '';
+
+
+    for (let item of itemsArr) {
+        const renderItem = renderItems(item);
+        renderItem.addEventListener('click', async () => {
+            await buyItem(item.id);
+
+            if (item.buyItem === true) {
+                renderItem.classList.add('item-bought');
+            } displayItems();
+        });
+        listContainer.append(renderItem);
+    }
+}
+
+displayItems();
+
+window.addEventListener('load', async () => {
+    itemsArr = await getItems();
+});

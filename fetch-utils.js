@@ -45,13 +45,29 @@ export async function signOutUser() {
 /* Data functions */
 export async function createItem(item, quantity) {
     const response = await client
-        .from('shopping-list-sb')
+        .from('list')
         .insert({ item: item, quantity: quantity, bought: false, user_id: client.auth.user().id }).single();
     
     return checkError(response);
 }
 
+export async function getItems() {
+    const response = await client
+        .from('list')
+        .select('*')
+        .order('id');
+    
+    return checkError(response);
+}
 
+export async function buyItem(id) {
+    const response = await client
+        .from('list')
+        .update({ bought: true })
+        .match({ id: id });
+
+    return checkError(response);
+}
 
 function checkError({ data, error }) {
     return error ? console.error(error) : data;
