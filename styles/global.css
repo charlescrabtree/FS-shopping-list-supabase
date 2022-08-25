@@ -52,3 +52,21 @@ footer {
     justify-content: flex-end;
     background-color: var(--footer-background);
 }
+
+.item-bought {
+    background-color: grey;
+    border: solid 2px rgb(72, 56, 56);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    text-decoration: line-through;
+    height: 35px;
+    width: 63%;
+    justify-self: center ;
+    
+}
+
+.hidden {
+    display: none;
+}
