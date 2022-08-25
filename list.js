@@ -60,4 +60,5 @@ displayItems();
 
 window.addEventListener('load', async () => {
     itemsArr = await getItems();
+    displayItems();
 });
